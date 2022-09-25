@@ -1,0 +1,16 @@
+.btnClose{
+  background-color: gray;
+}
+
+.modal_panel{
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.modal_header{
+  background-color: gray;
+}
+
+.modal_content{
+  background-color: darkgrey;
+}

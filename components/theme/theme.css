@@ -1,0 +1,78 @@
+:root {
+  --background-color: rgb(212, 212, 212);
+  --text-color: #121416d8;
+  --link-color: #543fd7;
+}
+
+html[data-theme='light'] {
+  --background-color: rgb(212, 212, 212);
+  --text-color: #121416d8;
+  --link-color: #543fd7;
+}
+
+html[data-theme='dark'] {
+  --background-color: #212a2e;
+  --text-color: rgb(212, 212, 212);
+  --link-color: #828fff;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.info {
+  background-color: cornflowerblue;
+  padding-right:4px;
+}
+
+.success {
+  background-color: chartreuse;
+  padding-right:4px;
+}
+
+.error {
+  background-color: darkorange;
+  padding-right:4px;
+}
+
+.warn {
+  background-color: lightcoral;
+  padding-right:4px;
+}
+/*
+#modals{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.modal{
+  pointer-events: auto;
+}
+*/
+.modal_header button{
+  background-color: aliceblue;
+  border: 0px;
+  padding: 0px 2px 0px 2px;
+}
+
+.modal_header button:hover{
+  background-color: darkgray;
+}
+
+.modal_header {
+  background-color: #212a2e;
+  padding: 0px 2px 0px 2px;
+  color: beige;
+}
+
+.modal_panel {
+  background-color:  beige;
+  color: #212a2e;
+  width: 100%;
+  height: 100%;
+}

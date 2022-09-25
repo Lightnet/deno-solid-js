@@ -6,18 +6,21 @@
   	<meta name="keywords" content="HTML, Javascript, Preact. Bun">
   	<meta name="author" content="John Doe">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
     <link rel="stylesheet" href="styles.css">
+    -->
     
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-n0nce'" />
-  	<script async src="https://unpkg.com/es-module-shims@1.5.9/dist/es-module-shims.js" nonce="n0nce"></script>
+  	<script async src="https://unpkg.com/es-module-shims@1.5.18/dist/es-module-shims.js" nonce="n0nce"></script>
     <script type="importmap" nonce="n0nce">
     {
       "imports":{
-        "axios":"https://unpkg.com/@bundled-es-modules/axios",
         "solid-js":"https://cdn.skypack.dev/solid-js",
         "solid-js/h":"https://cdn.skypack.dev/solid-js/h",
         "solid-js/web":"https://cdn.skypack.dev/solid-js/web",
         "solid-js/html":"https://cdn.skypack.dev/solid-js/html",
+        "@solidjs/router":"https://cdn.skypack.dev/@solidjs/router",
+        "solid-utils":"https://cdn.skypack.dev/solid-utils",
         "surrealdb.js":"https://cdn.skypack.dev/surrealdb.js"
       }
     }
@@ -31,6 +34,7 @@
 	</head>
 	<body>
     <div id="app"></div>
+    <div id="modal"></div>
     <label id="loading">Loading...</label>
 	</body>
 </html>

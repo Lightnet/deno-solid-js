@@ -6,18 +6,14 @@
 
 //import {h} from "solid-js"
 
-//for server
+//for server api
 //export function handle(req){
   //return new Response("Hello, World!",{status:200,headers:{'Content-Type':'text/html'}});
 //}
-import TestSQL from "../components/auth/surrealdb/TestSQL.jsx"
 
-function PageIndex() {
-  console.log("index!")
+export default function PageAccount() {
+  console.log("account")
   return (<div>
-    <label> App Page Test!</label>
-    <TestSQL/>
+    <label> Account!</label>
   </div>)
 }
-//
-export default PageIndex;

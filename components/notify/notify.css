@@ -1,0 +1,74 @@
+/*
+.info{
+  background-color: aqua;
+  color: black;
+}
+
+.success{
+  background-color: darkseagreen;
+  color: black;
+}
+
+.error{
+  background-color: tomato;
+  color: black;
+}
+
+.warn{
+  background-color: orangered;
+  color: black;
+}
+*/
+
+.notify{
+  position: relative;
+  overflow:hidden;
+  transition: 0.5s all ease-out;
+}
+
+.notify_in{
+  position: relative;
+  margin: auto;
+  margin-bottom: 4px;
+  padding: 4px;
+  overflow:hidden;
+  
+  animation-name: kfnotify_in;
+  animation-duration: 0.5s;
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.notify_out{
+  /*
+  margin-bottom:0;
+  padding-top:0;
+  padding-bottom:0;
+  */
+  height:0px;
+  opacity: 0;
+  transition: 0.5s all ease-out;
+}
+
+@keyframes kfnotify_in{
+  0% {
+    right:calc(-100%);
+  }
+  100% {
+    right:0%;
+  }
+}
+
+/*
+@keyframes kfnotify_out{
+  0% {
+    position: relative;
+    top:0px;
+    right:0;
+  }
+  100% {
+    position: relative;
+    right:calc(-100%);
+  }
+}
+*/

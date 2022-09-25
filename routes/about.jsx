@@ -11,7 +11,8 @@
   //return new Response("Hello, World!",{status:200,headers:{'Content-Type':'text/html'}});
 //}
 
-export default function App() {
+export default function PageAbout() {
+  console.log("about")
   return (<div>
     <label> About!</label>
   </div>)

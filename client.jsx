@@ -4,13 +4,12 @@
   Created By: Lightnet
 */
 
-// "surrealdb.js","https://unpkg.com/surrealdb.js@0.3.1/dist/web/index.js"
-
 import { render } from 'solid-js/web';
-import SurrealDB from "surrealdb.js";
+import { createApp } from 'solid-utils';
+//import SurrealDB from "surrealdb.js";
 import App from "./components/App.jsx";
 //console.log(App());
-
+/*
 console.log(SurrealDB)
 const db = new SurrealDB('http://127.0.0.1:8000/rpc');
 try{
@@ -18,7 +17,7 @@ try{
   await db.use('test','test');
   await db.query(`SELECT * FROM user;`);
   let token;
-  /*
+  
   token = await db.signup({
     DB: 'test',
     NS: 'test',
@@ -26,7 +25,6 @@ try{
     email: 'test@test.test',
     pass: 'pass'
   });
-  */
   
   token = await db.signin({
     DB: 'test',
@@ -36,13 +34,11 @@ try{
     pass: 'pass'
   });
   
-
   console.log(token)
 }catch(e){
   console.log(e)
 }
-
-
+*/
 
 /*
 function HelloWorld() {
@@ -52,15 +48,15 @@ function HelloWorld() {
     </>
   );
 }
-
 render(() => <HelloWorld />, document.getElementById('app'))
 */
 
 //render(() => <App />, document.getElementById('app'))
-render(App, document.getElementById('app'))
+//render(App, document.getElementById('app'))
+const dispose = createApp(App).mount('#app');
 
 const loading = document.getElementById('loading')
-document.body.removeChild(loading);
-
-
+if(loading){
+  document.body.removeChild(loading);
+}
 console.log("Hello World! Solidjs!");

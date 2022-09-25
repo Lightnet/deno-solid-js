@@ -14,14 +14,14 @@ import { config } from "dotenv";
 import Babel from "@babel/standalone";
 import solid from "babel-preset-solid";
 Babel.registerPreset("solid", solid());
-//import transformReactJsx from "https://esm.sh/@babel/plugin-transform-react-jsx";
 import chalk from "chalk";
+import { setupDataBase } from "./libs/clientSurrealDB.js";
 
-import Surreal from "surrealdb.js";
-const db = new Surreal('http://127.0.0.1:8000/rpc');
+//import Surreal from "surrealdb.js";
 
 /*
 try {
+  const db = new Surreal('http://127.0.0.1:8000/rpc');
   // Signin as a namespace, database, or root user
   await db.signin({
     user: 'root',
@@ -107,6 +107,7 @@ await apiFilesNames().then(() => console.log("API Files Done!"));
 const routeUrls = new Map();
 // Async
 async function routeFilesNames() {
+
   for await (const entry of fs.walk(Deno.cwd()+"/routes/")) {
     if(entry.path.endsWith('.jsx')){
       //console.log(entry)
@@ -130,7 +131,7 @@ async function routeFilesNames() {
     }
   }
 }
-await routeFilesNames().then(() => console.log("Routes Files Done!"));
+//await routeFilesNames().then(() => console.log("Routes Files Done!"));
 
 function clientRouteToString(fileName,props){
   if(!props){
@@ -164,6 +165,7 @@ async function apiFetch(req) {
 
   //CHECK PATH API files
   //this will filter out for return data else it return error
+  /*
 	if(pathname.search("/api/")==0){
     //console.log("FOUND API:", pathname)
     //need to change the way handle url in case of params and [name].js
@@ -191,9 +193,10 @@ async function apiFetch(req) {
       return new Response("Uh oh!!\n", { status: 500 });
     }
   }
+  */
 
   //need more detail which is parms matches or [name].jsx
-  //
+  /*
   if(routeUrls.has(pathname)==true){
     //page module
     const pageModule = routeUrls.get(pathname)
@@ -245,6 +248,7 @@ async function apiFetch(req) {
       return new Response("Uh oh!!\n"+e.toString(), { status: 500 });
     }
   }
+  */
 
   //default page
   //need to set up two type checks.
@@ -269,6 +273,7 @@ async function apiFetch(req) {
     try{
       const fileNameUrl = new URL("."+pathname, import.meta.url);
       const fileText = await Deno.readTextFile(fileNameUrl);
+      console.log(fileText)
       return new Response(fileText,{headers:{'Content-Type':'text/css'} });
     }catch(e){
       return new Response("Uh oh!!\n"+e.toString(), { status: 500 });
@@ -277,7 +282,7 @@ async function apiFetch(req) {
 
   //filename.jsx
   if(pathname.endsWith('.jsx')){
-    console.log("FOUND", pathname)
+    //console.log("FOUND", pathname)
     let textHtml = "";
     try{
       //const fileName = new URL("."+pathname, import.meta.url)
@@ -290,7 +295,7 @@ async function apiFetch(req) {
       //textJSX = textJSX.replace('/** @jsxRuntime classic */','')
       //textJSX = textJSX.replace('/** @jsx h */','/** @jsxImportSource https://esm.sh/preact */')
       //console.log(babelCore)
-      textHtml=Babel.transform(textJSX, {presets: ["solid"]}).code
+      textHtml=Babel.transform(textJSX, {presets: ["solid"], babelrc: false}).code
     }catch(e){
       console.log("ERROR?")
       console.log(e)
@@ -321,7 +326,7 @@ globalThis.addEventListener("unload", handler);
 
 globalThis.onload = async (e) => {
   //console.log(`got ${e.type} event in onload function (main)`);
-  //await initDB();
+  await setupDataBase();
   //testTables();
   //basic set up server or serve http
   serve(apiFetch,{port:port});
