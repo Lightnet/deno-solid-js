@@ -7,19 +7,20 @@
 //import * as path from "https://deno.land/std/path/mod.ts";
 import * as fs from "$std/fs/mod.ts";
 import { serve } from "$std/http/server.ts";
-import { crypto } from "$std/crypto/mod.ts";
+//import { crypto } from "$std/crypto/mod.ts";
 import { config } from "dotenv";
 //import * as babelCore from "https://esm.sh/@babel/core";
 // babel-standalone
-import Babel from "https://esm.sh/@babel/standalone";
-import solid from "https://esm.sh/babel-preset-solid";
+import Babel from "@babel/standalone";
+import solid from "babel-preset-solid";
 Babel.registerPreset("solid", solid());
 //import transformReactJsx from "https://esm.sh/@babel/plugin-transform-react-jsx";
-import chalk from "https://deno.land/x/chalk_deno@v4.1.1-deno/source/index.js"
-/*
+import chalk from "chalk";
+
 import Surreal from "surrealdb.js";
 const db = new Surreal('http://127.0.0.1:8000/rpc');
 
+/*
 try {
   // Signin as a namespace, database, or root user
   await db.signin({
@@ -29,11 +30,13 @@ try {
 
   // Select a specific namespace / database
   await db.use('test', 'test');
+  let data = await db.query(`SELECT * FROM user;`);
+  console.log(data)
 } catch (e) {
   console.error('ERROR', e);
 }
-*/
 
+*/
 
 const log = console.log;
 //console.log(chalk.blue('Hello world!'));
@@ -41,9 +44,6 @@ console.log(chalk.green('Hello world!'));
 //log(chalk.blue.bgRed.bold('Hello world!'));
 
 //console.log(crypto.randomUUID())
-//console.log(Deno)
-
-//import { document } from "./src/doc.js";// html doc string
 //console.log(document.toString())
 //const __filename = new URL(import.meta.url).pathname;
 //const __dirname = path.dirname(__filename);
@@ -57,7 +57,6 @@ const {
 //, ENVIRONMENT 
 }= config();
 
-//console.log(Deno)
 //console.log("PORT: ", PORT)
 //console.log("SECRET: ", SECRET)
 //console.log("ENVIRONMENT: ", ENVIRONMENT)
@@ -65,8 +64,7 @@ const {
 const port = Number(PORT) || 3000
 //console.log(port)
 // API and ROUTES
-//console.log("Deno.cwd()")
-//console.log(Deno.cwd())
+//console.log("Deno.cwd()", Deno.cwd())
 //console.log("INIT SET UP FILES...")
 
 // AWAIT IMPORT
@@ -138,7 +136,7 @@ function clientRouteToString(fileName,props){
   if(!props){
     props={};
   }
-  return `<script type="module" nonce="n0nce">
+return `<script type="module" nonce="n0nce">
   import { render } from 'solid-js/web';
   import App from "./routes/${fileName}"
   let props = JSON.parse('${JSON.stringify(props)}')
@@ -280,16 +278,8 @@ async function apiFetch(req) {
   //filename.jsx
   if(pathname.endsWith('.jsx')){
     console.log("FOUND", pathname)
-    //const importUrl = new URL("./"+"import-map.json", import.meta.url);
-    //console.log("importMapPath:",importUrl.toString())
-    //console.log(new URL('import_map.json', import.meta.url).toString())
-    //console.log(await Deno.emit(url))
-    //console.log("url.toString()")
-    //const url = new URL("."+pathname, import.meta.url);
-    //console.log(url.toString())
     let textHtml = "";
     try{
-      //                      "./app.js"      "file:///x:/projects/denopreactjs/dev.js"
       //const fileName = new URL("."+pathname, import.meta.url)
       //console.log("fileName: ", fileName.toString())
       //let textJSX = await Deno.readTextFile(fileName);
@@ -300,18 +290,6 @@ async function apiFetch(req) {
       //textJSX = textJSX.replace('/** @jsxRuntime classic */','')
       //textJSX = textJSX.replace('/** @jsx h */','/** @jsxImportSource https://esm.sh/preact */')
       //console.log(babelCore)
-      /*
-      const result = babelCore.transformSync(textJSX, {
-        "presets": [
-          //babelEnv,//fail not module
-          presetReact
-        ],
-        //plugins: ["@babel/plugin-transform-react-jsx"],
-        "plugins": [transformReactJsx],
-      });
-      //console.log(result.code)
-      textHtml= result.code;
-      */
       textHtml=Babel.transform(textJSX, {presets: ["solid"]}).code
     }catch(e){
       console.log("ERROR?")
@@ -345,7 +323,6 @@ globalThis.onload = async (e) => {
   //console.log(`got ${e.type} event in onload function (main)`);
   //await initDB();
   //testTables();
-
   //basic set up server or serve http
   serve(apiFetch,{port:port});
 };
