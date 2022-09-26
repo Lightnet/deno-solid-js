@@ -5,7 +5,7 @@
 */
 
 import { render } from 'solid-js/web';
-import { createApp } from 'solid-utils';
+//import { createApp } from 'solid-utils';
 //import SurrealDB from "surrealdb.js";
 import App from "./components/App.jsx";
 //console.log(App());
@@ -53,7 +53,8 @@ render(() => <HelloWorld />, document.getElementById('app'))
 
 //render(() => <App />, document.getElementById('app'))
 //render(App, document.getElementById('app'))
-const dispose = createApp(App).mount('#app');
+//const dispose = createApp(()=>App).mount('#app');
+const dispose = render(()=>(<App/>),document.getElementById('app'))
 
 const loading = document.getElementById('loading')
 if(loading){

@@ -10,13 +10,13 @@
 // 
 // 
 //import * as Buffer from 'buffer-esm'
-import { Link, useNavigate } from '@solidjs/router'
+import { Link, useNavigate } from 'https://cdn.skypack.dev/@solidjs/router'
 import { createEffect, createSignal } from 'solid-js'
 //import { useAuth } from './AuthProvider'
 import SurrealDB from 'surrealdb.js'
 //import SurrealDB from 'https://unpkg.com/surrealdb@0.0.1-beta.3.5/lib/src/index.js'
 
-console.log(SurrealDB)
+//console.log(SurrealDB)
 
 export default function Login() {
 

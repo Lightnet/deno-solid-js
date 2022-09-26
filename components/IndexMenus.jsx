@@ -8,8 +8,8 @@ import {
   createMemo
 } from 'solid-js';
 
-import { Link, useLocation } from '@solidjs/router';
-//import { Link, useLocation } from 'solid-app-router';
+import { Link, useLocation, useNavigate } from 'https://cdn.skypack.dev/@solidjs/router';
+//import { Link, useLocation } from '@solidjs/router';
 //import ToggleTheme from './theme/ToggleTheme';
 
 const IndexMenus = () => {
@@ -17,7 +17,7 @@ const IndexMenus = () => {
   const location = useLocation();
   //console.log(location)
   const pathname = createMemo(() => location.pathname);
-
+  const navigate = useNavigate();
   //for menu display
   let whitelist = [
     "/",
@@ -31,6 +31,16 @@ const IndexMenus = () => {
     "/todolist",
   ];
 
+  function linkHome(e){
+    e.preventDefault();
+    navigate("/", { replace: true })
+  }
+
+  function linkAbout(e){
+    e.preventDefault();
+    navigate("/", { replace: true })
+  }
+
   const displayMenu = createMemo(()=>{
     //console.log("FIND:",whitelist.find((item)=>{
       //return item === pathname()      
@@ -43,12 +53,12 @@ const IndexMenus = () => {
       //console.log("FOUND")
       // <ToggleTheme /> //does not work here layer?
       return ( <div>
-        <Link class="btnLink" href="/">Home</Link><span> | </span>
-        <Link class="btnLink" href="/about">About</Link><span> | </span>
-        <Link class="btnLink" href="/account">Account</Link><span> | </span>
-        <Link class="btnLink" href="/testlab">Test Lab</Link><span> | </span>
-        <Link class="btnLink" href="/surrealdb">SurrealDB</Link><span> | </span>
-        <Link class="btnLink" href="/todolist">To Do List</Link><span> | </span>
+        <a onClick={linkHome} href="/">Home</a><span> | </span>
+        <a onClick={linkAbout} href="/about">About</a><span> | </span>
+        <Link href="/account">Account</Link><span> | </span>
+        <Link href="/testlab">Test Lab</Link><span> | </span>
+        <Link href="/surrealdb">SurrealDB</Link><span> | </span>
+        <Link  href="/todolist">To Do List</Link><span> | </span>
         </div>)
     }else{
       //console.log("NOT FOUND")

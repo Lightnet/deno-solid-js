@@ -295,7 +295,8 @@ async function apiFetch(req) {
       //textJSX = textJSX.replace('/** @jsxRuntime classic */','')
       //textJSX = textJSX.replace('/** @jsx h */','/** @jsxImportSource https://esm.sh/preact */')
       //console.log(babelCore)
-      textHtml=Babel.transform(textJSX, {presets: ["solid"], babelrc: false}).code
+      //textHtml=Babel.transform(textJSX, {presets: ["solid"], babelrc: false}).code
+      textHtml=Babel.transform(textJSX, {presets: ["solid"]}).code
     }catch(e){
       console.log("ERROR?")
       console.log(e)
@@ -303,6 +304,19 @@ async function apiFetch(req) {
     }
     return new Response(textHtml,{ status:200, headers:{'Content-Type':'text/javascript'} });
     //return new Response("Hello, World!",{headers:{'Content-Type':'text/javascript'} });
+  }
+
+  if(pathname=='/about'){
+    let textHtml = await Deno.readTextFile("./index.html");
+    textHtml=textHtml.replace('<!--CLIENT-->','<script type="module" src="client.jsx" nonce="n0nce"></script>')
+    return new Response(textHtml,{status:200,headers:{'Content-Type':'text/html'}});
+    //return new Response(document.toString(),{status:200,headers:{'Content-Type':'text/html'}});
+  }
+  if(pathname=='/account'){
+    let textHtml = await Deno.readTextFile("./index.html");
+    textHtml=textHtml.replace('<!--CLIENT-->','<script type="module" src="client.jsx" nonce="n0nce"></script>')
+    return new Response(textHtml,{status:200,headers:{'Content-Type':'text/html'}});
+    //return new Response(document.toString(),{status:200,headers:{'Content-Type':'text/html'}});
   }
   //if the url page is not found return simple text
   //return new Response("Hello, World!",{status:200,headers:{'Content-Type':'text/html'}});
@@ -330,6 +344,7 @@ globalThis.onload = async (e) => {
   //testTables();
   //basic set up server or serve http
   serve(apiFetch,{port:port});
+  console.log(`http://localhost:${port}`)
 };
 
 globalThis.onbeforeunload = (e) => {

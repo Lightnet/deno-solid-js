@@ -5,8 +5,13 @@
 */
 
 
-import { createSignal, lazy } from "solid-js"
-import { Router, Routes, Route } from '@solidjs/router';
+import { lazy } from "solid-js"
+import { 
+  Router
+//, useRoutes
+, Routes
+, Route 
+} from 'https://cdn.skypack.dev/@solidjs/router';
 
 import IndexMenus from "./IndexMenus.jsx";
 
@@ -46,28 +51,49 @@ import SignOut from './auth/surrealdb/SignOut.jsx'
 //const SignUp = lazy(() => import('./auth/surrealdb/SignUp.jsx'))
 //const SignOut = lazy(() => import('./auth/surrealdb/SignOut.jsx'))
 //const Account = lazy(() => import('../routes/account.jsx'))
+/*
+const routes = [
+  {
+    path: '/',
+    component: Home
+  },
+  {
+    path: '/about',
+    component: About,
+  }
+]
+const RouterApp = () => {
+  const Route = useRoutes(routes);
+  console.log(Route)
+  return (
+  <Router>
+    <IndexMenus/>
+    <Route />
+  </Router>);
+};
+*/
 
 const RouterApp = () => {
   return (
   <Router>
     <IndexMenus/>
     <Routes>
-      <Route path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/account" component={Account}/>
-      <Route path="/signin" component={SignIn}/>
-      <Route path="/signup" component={SignUp}/>
-      <Route path="/signout" component={SignOut}/>
+      <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/account" component={Account} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/signout" component={SignOut} />
     </Routes>
   </Router>);
 };
+
 /*
 <Route path="/blog" component={Blog}/>
 <Route path="/todolist" component={ToDoList}/>
 <Route path="/surrealdb" component={SurrealDB}/>
 <Route path="/testlab" component={TestLab}/>
 */
-
 
 const RenderApp = () => {
   //<div>This site was made with Solid</div>
