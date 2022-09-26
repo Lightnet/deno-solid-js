@@ -4,9 +4,7 @@
   Created by: Lightnet
 */
 
-import { 
-  createMemo
-} from 'solid-js';
+import { createMemo } from 'solid-js';
 
 import { Link, useLocation, useNavigate } from 'https://cdn.skypack.dev/@solidjs/router';
 //import { Link, useLocation } from '@solidjs/router';
@@ -17,9 +15,9 @@ const IndexMenus = () => {
   const location = useLocation();
   //console.log(location)
   const pathname = createMemo(() => location.pathname);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   //for menu display
-  let whitelist = [
+  const whitelist = [
     "/",
     "/about",
     "/account",
@@ -30,16 +28,6 @@ const IndexMenus = () => {
     "/surrealdb",
     "/todolist",
   ];
-
-  function linkHome(e){
-    e.preventDefault();
-    navigate("/", { replace: true })
-  }
-
-  function linkAbout(e){
-    e.preventDefault();
-    navigate("/", { replace: true })
-  }
 
   const displayMenu = createMemo(()=>{
     //console.log("FIND:",whitelist.find((item)=>{
@@ -53,8 +41,8 @@ const IndexMenus = () => {
       //console.log("FOUND")
       // <ToggleTheme /> //does not work here layer?
       return ( <div>
-        <a onClick={linkHome} href="/">Home</a><span> | </span>
-        <a onClick={linkAbout} href="/about">About</a><span> | </span>
+        <Link href="/">Home</Link><span> | </span>
+        <Link href="/about">About</Link><span> | </span>
         <Link href="/account">Account</Link><span> | </span>
         <Link href="/testlab">Test Lab</Link><span> | </span>
         <Link href="/surrealdb">SurrealDB</Link><span> | </span>
